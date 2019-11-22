@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Hue</title>
+        <link rel="stylesheet" href="frame/boot"  crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <div id="app" class="container"> 
+            <div class="row">
+                <div class="col-6 col-md-4 pt-3" v-for="(light, lightId) in lights">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ light.name }}</h5>
+                            <p class="card-text">
+                                <span>Status: {{ light.state.on ? 'On' : 'Off' }}</span><br>
+                                <span>Brightness: {{ brightness(light) }}%</span>
+                            </p>
+                            <input type="range" min="1" max="254" class="w-100" v-model="light.state.bri" @change="setBrightness(lightId, light)">
+                            <a href="#" class="btn btn-primary mt-2" @click="toggleLight(lightId, light)">Toggle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            require('.render.js');
+        </script>
+        <script src="frame/vue"></script>
+        <script src="my.js"></script>
+
+    </body>
+</html>

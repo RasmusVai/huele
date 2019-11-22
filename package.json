@@ -1,0 +1,11 @@
+{
+  "name": "electron",
+  "version": "1.0.0",
+  "description": "hue",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC"
+}
