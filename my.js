@@ -1,3 +1,6 @@
+const ColorConverter = require('cie-rgb-color-converter');
+
+
 new Vue({
     el: "#app",
     data() {
@@ -5,9 +8,8 @@ new Vue({
             lights: null
         }
     },
-
     mounted() {
-        fetch('http://192.168.0.3/api/1zFf8JfvVnd47S-MKejXbz--dK3N13KI14Z80lmU/lights',
+        fetch('http://192.168.86.157/api/J9Sd33gAwMcZAeMxFSI0nIIW-iOBfwEGYU2cOytY/lights',
         {
             method: 'GET',
             headers: {
@@ -20,7 +22,7 @@ new Vue({
 
     methods: {
         toggleLight(lightId, light) {
-            fetch('http://192.168.0.3/api/1zFf8JfvVnd47S-MKejXbz--dK3N13KI14Z80lmU/lights/' + lightId + '/state/', {
+            fetch('http://192.168.86.157/api/J9Sd33gAwMcZAeMxFSI0nIIW-iOBfwEGYU2cOytY/lights/' + lightId + '/state/', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,7 +36,7 @@ new Vue({
             return (light.state.bri/255*100).toFixed(0)
         },
         setBrightness(lightId, light) {
-            fetch('http://192.168.0.3/api/1zFf8JfvVnd47S-MKejXbz--dK3N13KI14Z80lmU/lights/' + lightId + '/state/', {
+            fetch('http://192.168.86.157/api/J9Sd33gAwMcZAeMxFSI0nIIW-iOBfwEGYU2cOytY/lights/' + lightId + '/state/', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -45,6 +47,16 @@ new Vue({
             })
 
             console.log(light.state.bri)
+        },
+        lightColor(light) {
+            const xy = light.state.xy
+            const bri = light.state.bri
+            
+            let rgb = ColorConverter.xyBriToRgb(xy[0], xy[1], bri)
+            console.log(rgb)
+
+            return "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")"
         }
     }
 })
+
