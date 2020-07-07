@@ -12,6 +12,6 @@
     "cie-rgb-color-converter": "^1.0.1"
   },
   "devDependencies": {
-    "electron": "^7.1.4"
+    "electron": "^7.2.4"
   }
 }
